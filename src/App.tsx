@@ -1,11 +1,8 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import styles from "./App.module.scss";
-type user = {
-	id: number;
-	name: string;
-	[key: string]: string | { [key: string]: string } | number;
-};
-
+import CardList from "./components/Card-list/Card-list";
+import SearchBox from "./components/Search-box/Search-box";
+import user from "./models/user";
 const App: React.FC = () => {
 	const [monsters, setMonsters] = useState<user[]>([]),
 		[filtered, setFiltered] = useState<user[]>([]),
@@ -32,17 +29,8 @@ const App: React.FC = () => {
 	}, []);
 	return (
 		<div className={styles.App}>
-			<input
-				className={styles.Search}
-				placeholder="Search monsters"
-				type="search"
-				onChange={filterMonsters}
-				autoFocus
-				disabled={!canSearch}
-			/>
-			{filtered.map((m, i) => (
-				<h1 key={m.id}>{m.name}</h1>
-			))}
+			<SearchBox changeHandler={filterMonsters} isDisabled={!canSearch} />
+			<CardList filteredMonsters={filtered} />
 		</div>
 	);
 };
