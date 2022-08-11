@@ -5,11 +5,18 @@ const CardList: React.FC<{ filteredMonsters: user[] }> = ({
 	filteredMonsters,
 }) => {
 	return (
-		<>
+		<div className={styles.list}>
 			{filteredMonsters.map(m => (
-				<h1 key={m.id}>{m.name}</h1>
+				<div key={m.id} className={styles.item}>
+					<img
+						alt={"monster" + m.name}
+						src={`https://robohash.org/${m.id}?set=set2&size=100x100`}
+					/>
+					<h4>{m.name}</h4>
+					<p>{m.email}</p>
+				</div>
 			))}
-		</>
+		</div>
 	);
 };
 

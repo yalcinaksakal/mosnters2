@@ -29,6 +29,7 @@ const App: React.FC = () => {
 	}, []);
 	return (
 		<div className={styles.App}>
+			<h1 style={{ fontFamily: "Barlow Semi Condensed" }}>Monsters</h1>
 			<SearchBox changeHandler={filterMonsters} isDisabled={!canSearch} />
 			<CardList filteredMonsters={filtered} />
 		</div>
