@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import styles from "./App.module.scss";
 type user = {
 	id: number;
@@ -9,7 +9,13 @@ type user = {
 const App: React.FC = () => {
 	const [monsters, setMonsters] = useState<user[]>([]),
 		[filtered, setFiltered] = useState<user[]>([]),
-		[canSearch, setCanSearch] = useState(false);
+		[canSearch, setCanSearch] = useState(false),
+		filterMonsters: (e: ChangeEvent<HTMLInputElement>) => void = e => {
+			const searchStr = e.currentTarget.value.toLocaleLowerCase();
+			setFiltered(
+				monsters.filter(m => m.name.toLocaleLowerCase().includes(searchStr))
+			);
+		};
 	console.log("render");
 	useEffect(() => {
 		console.log("mounted");
@@ -30,12 +36,7 @@ const App: React.FC = () => {
 				className={styles.Search}
 				placeholder="Search monsters"
 				type="search"
-				onChange={e => {
-					const searchStr = e.target.value.toLocaleLowerCase();
-					setFiltered(
-						monsters.filter(m => m.name.toLocaleLowerCase().includes(searchStr))
-					);
-				}}
+				onChange={filterMonsters}
 				autoFocus
 				disabled={!canSearch}
 			/>
