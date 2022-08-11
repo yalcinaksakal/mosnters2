@@ -4,11 +4,12 @@ import styles from "./Search-box.module.scss";
 const SearchBox: React.FC<{
 	changeHandler: (e: ChangeEvent<HTMLInputElement>) => void;
 	isDisabled: boolean;
-}> = ({ changeHandler, isDisabled }) => {
+	placeHolder: string;
+}> = ({ changeHandler, isDisabled, placeHolder }) => {
 	return (
 		<input
 			className={styles.Search}
-			placeholder="Search monsters"
+			placeholder={placeHolder}
 			type="search"
 			onChange={changeHandler}
 			autoFocus
